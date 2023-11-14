@@ -2,7 +2,7 @@
  * @Author: Zefu linzefu0826@outlook.com
  * @Date: 2023-11-10 19:38:23
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-11-11 13:46:52
+ * @LastEditTime: 2023-11-14 14:42:08
  * @FilePath: /pointCloudUtils/src/pointCloud.cpp
  * @Description: 
  */
@@ -87,10 +87,11 @@ void PointCloud::loadFromFile(const std::string& filename){
         std::cout << "Unable to open file";
     }
 }
-void PointCloud::printPointInfo(int index) const {
+void PointCloud::printPointInfo(int index) const { 
     if(index < points.size()){
         const Point& point = points[index];
-        std::cout << "x: " << point.x << ", "
+        std::cout 
+                << "x: " << point.x << ", "
                 << "y: " << point.y << ", "
                 << "intensity: " << point.intensity << ", "
                 << "timestamp: " << point.timestamp << ", "

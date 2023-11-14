@@ -2,7 +2,7 @@
  * @Author: Zefu Lin linzefu0826@outlook.com
  * @Date: 2023-11-01 21:05:08
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-11-11 13:41:10
+ * @LastEditTime: 2023-11-14 15:39:01
  * @FilePath: /pointCloudUtils/include/icp.h
  * @Description: 2D ICP
  * 
@@ -24,7 +24,8 @@ private:
     double fitnessEpsilon;
     double fitnessScore;
     double lastFitnessScore;
-    Eigen::Affine2d transform;
+    bool isConverge = false;
+    Eigen::Affine2d transform = Eigen::Affine2d::Identity();
 
 public:
     ICP(int maxIterations = 100, double maxDistanceThreshold = 1.0, 
@@ -38,8 +39,28 @@ public:
         return fitnessScore;
     }
 
+    bool hasConverged() const {
+        return isConverge;
+    }
+
     Eigen::Affine2d getTransformation() const {
         return transform;
+    }
+
+    void setMaxIterations(int maxIterations) {
+        this->maxIterations = maxIterations;
+    }
+
+    void setMaxDistanceThreshold(double maxDistanceThreshold) {
+        this->maxDistanceThreshold = maxDistanceThreshold;
+    }
+
+    void setTransformationEpsilon(double transformationEpsilon) {
+        this->transformationEpsilon = transformationEpsilon;
+    }
+
+    void setFitnessEpsilon(double fitnessEpsilon) {
+        this->fitnessEpsilon = fitnessEpsilon;
     }
 };
 

@@ -170,17 +170,17 @@ test/fast:
 .PHONY : test/fast
 
 #=============================================================================
-# Target rules for targets named PointCloudLibrary
+# Target rules for targets named pointCloudUtils
 
 # Build rule for target.
-PointCloudLibrary: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PointCloudLibrary
-.PHONY : PointCloudLibrary
+pointCloudUtils: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pointCloudUtils
+.PHONY : pointCloudUtils
 
 # fast build rule for target.
-PointCloudLibrary/fast:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/build
-.PHONY : PointCloudLibrary/fast
+pointCloudUtils/fast:
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/build
+.PHONY : pointCloudUtils/fast
 
 src/icp.o: src/icp.cpp.o
 
@@ -188,7 +188,7 @@ src/icp.o: src/icp.cpp.o
 
 # target to build an object file
 src/icp.cpp.o:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/icp.cpp.o
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/icp.cpp.o
 .PHONY : src/icp.cpp.o
 
 src/icp.i: src/icp.cpp.i
@@ -197,7 +197,7 @@ src/icp.i: src/icp.cpp.i
 
 # target to preprocess a source file
 src/icp.cpp.i:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/icp.cpp.i
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/icp.cpp.i
 .PHONY : src/icp.cpp.i
 
 src/icp.s: src/icp.cpp.s
@@ -206,7 +206,7 @@ src/icp.s: src/icp.cpp.s
 
 # target to generate assembly for a file
 src/icp.cpp.s:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/icp.cpp.s
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/icp.cpp.s
 .PHONY : src/icp.cpp.s
 
 src/pointCloud.o: src/pointCloud.cpp.o
@@ -215,7 +215,7 @@ src/pointCloud.o: src/pointCloud.cpp.o
 
 # target to build an object file
 src/pointCloud.cpp.o:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/pointCloud.cpp.o
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/pointCloud.cpp.o
 .PHONY : src/pointCloud.cpp.o
 
 src/pointCloud.i: src/pointCloud.cpp.i
@@ -224,7 +224,7 @@ src/pointCloud.i: src/pointCloud.cpp.i
 
 # target to preprocess a source file
 src/pointCloud.cpp.i:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/pointCloud.cpp.i
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/pointCloud.cpp.i
 .PHONY : src/pointCloud.cpp.i
 
 src/pointCloud.s: src/pointCloud.cpp.s
@@ -233,7 +233,7 @@ src/pointCloud.s: src/pointCloud.cpp.s
 
 # target to generate assembly for a file
 src/pointCloud.cpp.s:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/src/pointCloud.cpp.s
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/src/pointCloud.cpp.s
 .PHONY : src/pointCloud.cpp.s
 
 test/test.o: test/test.cpp.o
@@ -276,7 +276,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... PointCloudLibrary"
+	@echo "... pointCloudUtils"
 	@echo "... src/icp.o"
 	@echo "... src/icp.i"
 	@echo "... src/icp.s"

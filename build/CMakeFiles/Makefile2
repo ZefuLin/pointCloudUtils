@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/zefu/Projects/pointCloudUtils/build
 
 # The main recursive "all" target.
 all: CMakeFiles/test.dir/all
-all: CMakeFiles/PointCloudLibrary.dir/all
+all: CMakeFiles/pointCloudUtils.dir/all
 
 .PHONY : all
 
@@ -65,7 +65,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/test.dir/clean
-clean: CMakeFiles/PointCloudLibrary.dir/clean
+clean: CMakeFiles/pointCloudUtils.dir/clean
 
 .PHONY : clean
 
@@ -73,7 +73,7 @@ clean: CMakeFiles/PointCloudLibrary.dir/clean
 # Target rules for target CMakeFiles/test.dir
 
 # All Build rule for target.
-CMakeFiles/test.dir/all: CMakeFiles/PointCloudLibrary.dir/all
+CMakeFiles/test.dir/all: CMakeFiles/pointCloudUtils.dir/all
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/depend
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zefu/Projects/pointCloudUtils/build/CMakeFiles --progress-num=4,5 "Built target test"
@@ -97,31 +97,31 @@ CMakeFiles/test.dir/clean:
 .PHONY : CMakeFiles/test.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/PointCloudLibrary.dir
+# Target rules for target CMakeFiles/pointCloudUtils.dir
 
 # All Build rule for target.
-CMakeFiles/PointCloudLibrary.dir/all:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/depend
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zefu/Projects/pointCloudUtils/build/CMakeFiles --progress-num=1,2,3 "Built target PointCloudLibrary"
-.PHONY : CMakeFiles/PointCloudLibrary.dir/all
+CMakeFiles/pointCloudUtils.dir/all:
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/depend
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zefu/Projects/pointCloudUtils/build/CMakeFiles --progress-num=1,2,3 "Built target pointCloudUtils"
+.PHONY : CMakeFiles/pointCloudUtils.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/PointCloudLibrary.dir/rule: cmake_check_build_system
+CMakeFiles/pointCloudUtils.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zefu/Projects/pointCloudUtils/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/PointCloudLibrary.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/pointCloudUtils.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zefu/Projects/pointCloudUtils/build/CMakeFiles 0
-.PHONY : CMakeFiles/PointCloudLibrary.dir/rule
+.PHONY : CMakeFiles/pointCloudUtils.dir/rule
 
 # Convenience name for target.
-PointCloudLibrary: CMakeFiles/PointCloudLibrary.dir/rule
+pointCloudUtils: CMakeFiles/pointCloudUtils.dir/rule
 
-.PHONY : PointCloudLibrary
+.PHONY : pointCloudUtils
 
 # clean rule for target.
-CMakeFiles/PointCloudLibrary.dir/clean:
-	$(MAKE) -f CMakeFiles/PointCloudLibrary.dir/build.make CMakeFiles/PointCloudLibrary.dir/clean
-.PHONY : CMakeFiles/PointCloudLibrary.dir/clean
+CMakeFiles/pointCloudUtils.dir/clean:
+	$(MAKE) -f CMakeFiles/pointCloudUtils.dir/build.make CMakeFiles/pointCloudUtils.dir/clean
+.PHONY : CMakeFiles/pointCloudUtils.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

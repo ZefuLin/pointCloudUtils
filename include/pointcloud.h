@@ -2,7 +2,7 @@
  * @Author: Zefu Lin linzefu0826@outlook.com
  * @Date: 2023-11-01 21:03:50
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-11-11 13:50:58
+ * @LastEditTime: 2023-11-13 18:12:33
  * @FilePath: /pointCloudUtils/include/pointcloud.h
  * @Description: 
  * 
@@ -71,6 +71,7 @@ public:
     void centerPointCloud();
     
     const std::vector<Point>& getPoints() const;
+    // ! 可能要修改计算点云中心的方式，源点云和目标点云中心的平移会很大程度影响最终的平移
     Point meanPoint() const;
     Point findClosestPoint(const Point& target) const;
     PointCloud copy() const;

@@ -1,0 +1,3 @@
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/lib/libpointCloudUtils.a
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/pointcloud.h
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/icp.h

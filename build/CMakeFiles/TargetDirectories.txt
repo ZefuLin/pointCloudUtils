@@ -5,4 +5,4 @@
 /home/zefu/Projects/pointCloudUtils/build/CMakeFiles/rebuild_cache.dir
 /home/zefu/Projects/pointCloudUtils/build/CMakeFiles/edit_cache.dir
 /home/zefu/Projects/pointCloudUtils/build/CMakeFiles/test.dir
-/home/zefu/Projects/pointCloudUtils/build/CMakeFiles/PointCloudLibrary.dir
+/home/zefu/Projects/pointCloudUtils/build/CMakeFiles/pointCloudUtils.dir
