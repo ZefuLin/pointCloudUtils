@@ -1,3 +1,7 @@
 /home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/lib/libpointCloudUtils.a
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/ICP2D.h
 /home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/pointcloud.h
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/kdtree.h
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/icpPointToPoint.h
 /home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/icp.h
+/home/zefu/Projects/BEV-SLAM/third_party/pointCloudUtils/include/matrix.h

@@ -2,7 +2,7 @@
  * @Author: Zefu linzefu0826@outlook.com
  * @Date: 2023-11-10 19:38:23
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-11-14 14:42:08
+ * @LastEditTime: 2023-12-28 11:11:06
  * @FilePath: /pointCloudUtils/src/pointCloud.cpp
  * @Description: 
  */
@@ -43,15 +43,13 @@ void PointCloud::saveToFile(const std::string& filename) const {
     if (outFile.is_open()) {
         outFile << "Point Cloud Utils v1.0\n";
         outFile << "point cloud size: " << points.size() << "\n";
-        outFile << "x y intensity timestamp tag priority isCenter\n";
+        outFile << "x y intensity\n";
         for (const auto& point : points) {
             outFile << point.x << " "
                     << point.y << " "
-                    << point.intensity << " "
-                    << point.timestamp << " "
-                    << point.tag << " "
-                    << point.priority << " "
-                    << point.isCenter << "\n";
+                    << point.intensity 
+                    << "\n";
+                    
         }
         outFile.close();
     } else {
@@ -74,13 +72,13 @@ void PointCloud::loadFromFile(const std::string& filename){
         while (std::getline(inFile, line)) {
             std::istringstream iss(line);
             double x, y;
-            int intensity, timestamp, tag, priority;
+            int intensity;
             bool isCenter;
-            if (!(iss >> x >> y >> intensity >> timestamp >> tag >> priority >> isCenter)) {
+            if (!(iss >> x >> y >> intensity)) {
                 std::cerr << "data type error!" << std::endl;
                 break; // 出错，跳出循环
             }
-            points.emplace_back(x, y, intensity, timestamp, tag, priority, isCenter);
+            points.emplace_back(x, y, intensity);
         }
         inFile.close();
     } else {
@@ -93,11 +91,12 @@ void PointCloud::printPointInfo(int index) const {
         std::cout 
                 << "x: " << point.x << ", "
                 << "y: " << point.y << ", "
-                << "intensity: " << point.intensity << ", "
-                << "timestamp: " << point.timestamp << ", "
-                << "tag: " << point.tag << ", "
-                << "priority: " << point.priority << ", "
-                << "isCenter: " << (point.isCenter ? "true" : "false") << "\n";
+                // << "intensity: " << point.intensity << ", "
+                // << "timestamp: " << point.timestamp << ", "
+                // << "tag: " << point.tag << ", "
+                // << "priority: " << point.priority << ", "
+                // << "isCenter: " << (point.isCenter ? "true" : "false") 
+                << "\n";
     } else {
         std::cout << "Index out of range!\n";
     }

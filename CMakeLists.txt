@@ -12,12 +12,10 @@ endif()
 
 # 寻找库
 find_package(Eigen3 REQUIRED)
-find_package(PCL 1.10 REQUIRED)
 
 # 添加include文件夹
 include_directories(
   ${EIGEN3_INCLUDE_DIR}
-  ${PCL_INCLUDE_DIRS}
   include
 )
 
@@ -30,7 +28,7 @@ file(GLOB TEST_SOURCES test/*.cpp)
 foreach(testsource ${TEST_SOURCES})
     get_filename_component(testname ${testsource} NAME_WE)
     add_executable(${testname} ${testsource})
-    target_link_libraries(${testname} ${PCL_LIBRARIES} pointCloudUtils) 
+    target_link_libraries(${testname} pointCloudUtils) 
 endforeach(testsource ${TEST_SOURCES} )
 
 # 安装库

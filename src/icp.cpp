@@ -1,66 +1,85 @@
 #include "icp.h"
+using namespace std;
 
-void ICP::align(const PointCloud& source, const PointCloud& target) {
-        
-    PointCloud sourceCopy = source.copy();
-    PointCloud targetCopy = target.copy();
-    isConverge = false;
+Icp::Icp (double *M,const int32_t M_num,const int32_t dim) 
+:m_dim(dim), m_max_iter(200), m_min_delta(1e-4) 
+{
+  
+	// check for correct dimensionality
+	if (dim!=2 && dim!=3) {
+		cout << "ERROR: LIBICP works only for data of dimensionality 2 or 3" << endl;
+		m_kd_tree = 0;
+		return;
+	}
+	// check for minimum number of points
+	if (M_num<5) {
+		cout << "ERROR: LIBICP works only with at least 5 model points" << endl;
+		m_kd_tree = 0;
+		return;
+	}
 
-    for (int i = 0; i < maxIterations; i++) {
-        // 找到对应点
-        PointCloud correspondences;
-        PointCloud closestPoints;
-        for (const auto& point : sourceCopy.getPoints()) {
-            Point targetPoint = targetCopy.findClosestPoint(point);
-            if (point.distanceTo(targetPoint) < maxDistanceThreshold) {
-                correspondences.addPoint(targetPoint);
-                closestPoints.addPoint(point);
-            }
-        }
-        
-        // 计算质心
-        Point sourceMean = sourceCopy.meanPoint();
-        Point targetMean = targetCopy.meanPoint();
+	// copy model points to M_data
+	m_kd_data.resize(boost::extents[M_num][dim]);
+	for (int32_t m=0; m<M_num; m++)
+		for (int32_t n=0; n<dim; n++)
+		  m_kd_data[m][n] = (float)M[m*dim+n];
 
-        // 移动点云到质心 (归一化)
-        sourceCopy.centerPointCloud();
-        targetCopy.centerPointCloud();
+	// build a kd tree from the model point cloud
+	m_kd_tree = new kdtree::KDTree(m_kd_data);
+}
 
-        // 构造协方差矩阵H
-        Eigen::MatrixXd H = Eigen::Matrix2d::Zero(2, 2);
-        for (size_t j = 0; j < closestPoints.size(); j++) {
-            const Point& p1 = closestPoints.getPoint(j);
-            const Point& p2 = correspondences.getPoint(j); 
-            Eigen::Vector2d d1(p1.x, p1.y);
-            Eigen::Vector2d d2(p2.x, p2.y);
-            H += d1 * d2.transpose();
-        }
+Icp::~Icp () {
+  if (m_kd_tree)
+    delete m_kd_tree;
+}
 
-        // 使用SVD分解求解R和t
-        Eigen::JacobiSVD<Eigen::MatrixXd> svd(H, Eigen::ComputeThinU | Eigen::ComputeThinV);
-        // ! 2D情况下 V*U.transpose 和 U*V.transpose 对应的角度是一样的，R的行列式也一样
-        // ! 区别就是 V*U.transpose代表逆时针， U*V.transpose是顺时针
-        Eigen::Matrix2d R = svd.matrixV() * svd.matrixU().transpose();
-        Eigen::Vector2d t = Eigen::Vector2d(targetMean.x, targetMean.y) - R * Eigen::Vector2d(sourceMean.x, sourceMean.y);
+double Icp::fit( double *T,const int32_t T_num,Matrix &R,Matrix &t,double indist/*=-1*/ )
+{
+	// make sure we have a model tree
+	if (!m_kd_tree) {
+		cout << "ERROR: No model available." << endl;
+		return 0;
+	}
 
-        // 更新变换矩阵和源点云
-        Eigen::Affine2d newTransform = Eigen::Translation2d(t) * R;
-        transform = newTransform * transform;
-        sourceCopy.transform(newTransform);
+	// check for minimum number of points
+	if (T_num<5) {
+		cout << "ERROR: Icp works only with at least 5 template points" << endl;
+		return 0;
+	}
 
-        // 检查收敛条件
-        fitnessScore = 0.0;
-        for (size_t j = 0; j < closestPoints.size(); j++) {
-            fitnessScore += std::pow(closestPoints.getPoint(j).distanceTo(correspondences.getPoint(j)),2);
-        }
-        fitnessScore /= closestPoints.size();
+	// set active points
+	vector<int32_t> active;
+	if (indist<=0) {
+	active.clear();
+	for (int32_t i=0; i<T_num; i++)
+	  active.push_back(i);
+	} else {
+	active = getInliers(T,T_num,R,t,indist);
+	}
 
-        if (newTransform.affine().squaredNorm() < transformationEpsilon ||
-            std::abs(fitnessScore - lastFitnessScore) < fitnessEpsilon) 
-        {
-            isConverge = true;
-            break;
-        }
-        lastFitnessScore = fitnessScore;
-    }
+	// run icp
+	fitIterate(T,T_num,R,t,indist);
+
+	return getResidual(T,T_num,R,t,m_active);
+}
+
+void Icp::fitIterate( double *T,const int32_t T_num,Matrix &R,Matrix &t, double indist /*= -1*/ )
+{
+	if(indist<=0){
+		m_active.clear();m_active.resize(T_num);
+		for(int32_t i=0;i<T_num;i++){
+			m_active[i] = i;
+		}
+		m_inlier_ratio = 1;
+	}
+	double delta = 1000;
+	int32_t iter;
+	for(iter=0; iter<m_max_iter && delta>m_min_delta; iter++){
+		if(indist>0){
+			indist = std::max(indist*0.9,0.05);
+			m_active = getInliers(T,T_num,R,t,indist);
+			m_inlier_ratio = (double)m_active.size()/T_num;
+		}
+		delta=fitStep(T,T_num,R,t,m_active);
+	}
 }
