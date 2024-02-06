@@ -161,7 +161,8 @@ CMakeFiles/pointCloudUtils.dir/src/ICP2D.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/mm_malloc.h \
- /usr/include/c++/9/stdlib.h /usr/include/c++/9/cstddef \
+ /usr/include/c++/9/stdlib.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/omp.h /usr/include/c++/9/cstddef \
  /usr/include/c++/9/cassert /usr/include/assert.h \
  /usr/include/c++/9/functional /usr/include/c++/9/tuple \
  /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \

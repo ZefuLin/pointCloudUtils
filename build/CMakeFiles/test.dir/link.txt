@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/test.dir/test/test.cpp.o -o test  libpointCloudUtils.a 
+/usr/bin/c++  -fopenmp CMakeFiles/test.dir/test/test.cpp.o -o test  -Wl,-rpath,/home/zefu/Projects/pointCloudUtils/build libpointCloudUtils.so 

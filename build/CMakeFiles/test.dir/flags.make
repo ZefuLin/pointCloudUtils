@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/eigen3 -I/home/zefu/Projects/pointCloudUtils/include
+CXX_INCLUDES = -I/usr/include/eigen3 -I/home/zefu/Projects/pointCloudUtils/boost -I/home/zefu/Projects/pointCloudUtils/include
 
-CXX_FLAGS = -std=gnu++14
+CXX_FLAGS =  -fopenmp -std=gnu++14
 

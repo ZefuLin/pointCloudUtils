@@ -2,7 +2,7 @@
  * @Author: Zefu Lin linzefu0826@outlook.com
  * @Date: 2023-11-01 21:03:50
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-12-28 11:13:51
+ * @LastEditTime: 2024-01-30 17:29:02
  * @FilePath: /pointCloudUtils/include/pointcloud.h
  * @Description: 
  * 
@@ -22,17 +22,21 @@ class Point {
 public:
     double x;  
     double y;  
+    double theta;
     int intensity;  
 
     // 构造函数
     Point() :
-        x(0.0), y(0.0), intensity(0){}
+        x(0.0), y(0.0), theta(0), intensity(0){}
 
     Point(double x, double y) :
-        x(x), y(y), intensity(0) {}
+        x(x), y(y), theta(0), intensity(0) {}
 
-    Point(double x, double y, int intensity) :
-        x(x), y(y), intensity(intensity){}
+    Point(double x, double y, double theta) :
+        x(x), y(y), theta(theta), intensity(0){}
+
+    Point(double x, double y, double theta, int intensity) :
+        x(x), y(y), theta(theta), intensity(intensity){}
 
     double distanceTo(const Point& other) const {
         return std::sqrt(std::pow((x - other.x), 2) + std::pow((y - other.y) , 2));
@@ -55,6 +59,7 @@ public:
     bool removePoint(int index);
     size_t size() const;
     Point getPoint(int index) const;
+    const std::vector<Point>& getPoints() const;
     bool isEmpty() const;
     void clear();
     void saveToFile(const std::string& filename) const;
@@ -77,7 +82,7 @@ public:
         return *this;
     }
     
-    const std::vector<Point>& getPoints() const;
+    
     Point meanPoint() const;
     Point findClosestPoint(const Point& target) const;
     PointCloud copy() const;   

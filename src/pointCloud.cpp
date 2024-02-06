@@ -2,7 +2,7 @@
  * @Author: Zefu linzefu0826@outlook.com
  * @Date: 2023-11-10 19:38:23
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2023-12-28 11:11:06
+ * @LastEditTime: 2024-01-03 11:07:23
  * @FilePath: /pointCloudUtils/src/pointCloud.cpp
  * @Description: 
  */
@@ -43,10 +43,11 @@ void PointCloud::saveToFile(const std::string& filename) const {
     if (outFile.is_open()) {
         outFile << "Point Cloud Utils v1.0\n";
         outFile << "point cloud size: " << points.size() << "\n";
-        outFile << "x y intensity\n";
+        outFile << "x y theta intensity\n";
         for (const auto& point : points) {
             outFile << point.x << " "
                     << point.y << " "
+                    << point.theta << " "
                     << point.intensity 
                     << "\n";
                     
@@ -71,14 +72,14 @@ void PointCloud::loadFromFile(const std::string& filename){
         // 逐行读取点的信息
         while (std::getline(inFile, line)) {
             std::istringstream iss(line);
-            double x, y;
+            double x, y, theta;
             int intensity;
             bool isCenter;
-            if (!(iss >> x >> y >> intensity)) {
+            if (!(iss >> x >> y >> theta >> intensity)) {
                 std::cerr << "data type error!" << std::endl;
                 break; // 出错，跳出循环
             }
-            points.emplace_back(x, y, intensity);
+            points.emplace_back(x, y, theta, intensity);
         }
         inFile.close();
     } else {

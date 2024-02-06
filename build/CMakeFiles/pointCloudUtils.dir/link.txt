@@ -1,2 +1,1 @@
-/usr/bin/ar qc libpointCloudUtils.a CMakeFiles/pointCloudUtils.dir/src/ICP2D.cpp.o CMakeFiles/pointCloudUtils.dir/src/icp.cpp.o CMakeFiles/pointCloudUtils.dir/src/icpPointToPoint.cpp.o CMakeFiles/pointCloudUtils.dir/src/kdtree.cpp.o CMakeFiles/pointCloudUtils.dir/src/matrix.cpp.o CMakeFiles/pointCloudUtils.dir/src/pointCloud.cpp.o
-/usr/bin/ranlib libpointCloudUtils.a
+/usr/bin/c++ -fPIC  -fopenmp -shared -Wl,-soname,libpointCloudUtils.so -o libpointCloudUtils.so CMakeFiles/pointCloudUtils.dir/src/ICP2D.cpp.o CMakeFiles/pointCloudUtils.dir/src/icp.cpp.o CMakeFiles/pointCloudUtils.dir/src/icpPointToPoint.cpp.o CMakeFiles/pointCloudUtils.dir/src/kdtree.cpp.o CMakeFiles/pointCloudUtils.dir/src/matrix.cpp.o CMakeFiles/pointCloudUtils.dir/src/pointCloud.cpp.o 

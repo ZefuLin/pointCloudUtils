@@ -110,6 +110,8 @@ double IcpPointToPoint::fitStep (double *T,const int32_t T_num,Matrix &R,Matrix 
   }
   
   // subtract mean
+  if (active.size() < 1) return -1;
+  
   mu_m = mu_m/(double)active.size();
   mu_t = mu_t/(double)active.size();
   Matrix q_m = p_m - Matrix::ones(active.size(),1)*mu_m;

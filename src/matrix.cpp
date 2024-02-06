@@ -303,10 +303,21 @@ Matrix Matrix::operator/ (const Matrix &M) {
   } 
 }
 
+// Matrix Matrix::operator/ (const FLOAT &s) {
+//   if (fabs(s)<1e-20) {
+//     cerr << "ERROR: Trying to divide by zero!" << endl;
+//     exit(0);
+//   }
+//   Matrix C(m,n);
+//   for (int32_t i=0; i<m; i++)
+//     for (int32_t j=0; j<n; j++)
+//       C.val[i][j] = val[i][j]/s;
+//   return C;
+// }
+
 Matrix Matrix::operator/ (const FLOAT &s) {
   if (fabs(s)<1e-20) {
-    cerr << "ERROR: Trying to divide by zero!" << endl;
-    exit(0);
+    throw std::runtime_error("ERROR: Trying to divide by zero!");
   }
   Matrix C(m,n);
   for (int32_t i=0; i<m; i++)

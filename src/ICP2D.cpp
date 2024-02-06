@@ -12,8 +12,8 @@ bool ICP2D::align(const PointCloud& source, const PointCloud& target)
     double* T = (double*)calloc(dim*num_src,sizeof(double));
 
     for (int k = 0; k < num_src; ++k){
-        M[k*dim+0] = source.points[k].x;
-        M[k*dim+1] = source.points[k].y;
+        T[k*dim+0] = source.points[k].x;
+        T[k*dim+1] = source.points[k].y;
     }
 
     for (int k = 0; k < num_tgt; ++k){
