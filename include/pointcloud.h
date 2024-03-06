@@ -2,7 +2,7 @@
  * @Author: Zefu Lin linzefu0826@outlook.com
  * @Date: 2023-11-01 21:03:50
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2024-01-30 17:29:02
+ * @LastEditTime: 2024-03-04 17:02:41
  * @FilePath: /pointCloudUtils/include/pointcloud.h
  * @Description: 
  * 
@@ -69,8 +69,10 @@ public:
     void transform(const Eigen::Matrix2d& rotation, const Eigen::Vector2d& translation);
     void transform(const Eigen::Matrix3d& matrix);
     void transform(const Eigen::Affine2d& transform);
-    void transformClockwise(double radian, const Eigen::Vector2d& translation);
-    void transformCounterClockwise(double radian, const Eigen::Vector2d& translation);
+    void transform(const std::vector<double> &pose);
+    void transform(const double x, const double y, const double theta);
+    // void transformClockwise(double radian, const Eigen::Vector2d& translation);
+    // void transformCounterClockwise(double radian, const Eigen::Vector2d& translation);
     void voxelDownsample(double voxelSize);
     void centerPointCloud();
 

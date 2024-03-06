@@ -2,7 +2,7 @@
  * @Author: Zefu linzefu0826@outlook.com
  * @Date: 2023-11-10 19:38:23
  * @LastEditors: Zefu linzefu0826@outlook.com
- * @LastEditTime: 2024-01-03 11:07:23
+ * @LastEditTime: 2024-03-04 17:03:00
  * @FilePath: /pointCloudUtils/src/pointCloud.cpp
  * @Description: 
  */
@@ -115,40 +115,54 @@ void PointCloud::transform(const Eigen::Matrix2d& rotation, const Eigen::Vector2
         vec = rotation * vec + translation;
         point.x = vec(0);
         point.y = vec(1);
+        point.theta += std::atan2(rotation(1, 0), rotation(0, 0));
     }
 }
 
 void PointCloud::transform(const Eigen::Matrix3d& matrix) {
-    for (auto& point : points) {
-        Eigen::Vector3d vec(point.x, point.y, 1.0);
-        vec = matrix * vec;
-        point.x = vec(0) / vec(2);
-        point.y = vec(1) / vec(2);
-    }
+    Eigen::Matrix2d rotation = matrix.block<2, 2>(0, 0);
+    Eigen::Vector2d translation = matrix.block<2, 1>(0, 2);
+    transform(rotation, translation);
 }
 
 void PointCloud::transform(const Eigen::Affine2d& transform) {
-    for (auto& point : points) {
-        Eigen::Vector2d vec(point.x, point.y);
-        vec = transform * vec;
-        point.x = vec(0);
-        point.y = vec(1);
-    }
+    Eigen::Matrix2d rotation = transform.rotation();
+    Eigen::Vector2d translation = transform.translation();
+    this->transform(rotation, translation);
 }
 
-void PointCloud::transformClockwise(double radian, const Eigen::Vector2d& translation) {
+void PointCloud::transform(const double x, const double y, const double theta) {
+
+    Eigen::Vector2d translation(x, y);
     Eigen::Matrix2d rotation;
-    rotation <<  cos(radian), sin(radian),
-                -sin(radian), cos(radian);
-    transform(rotation, translation);
+    rotation << cos(theta), -sin(theta),
+                sin(theta), cos(theta);
+    this->transform(rotation, translation);
 }
 
-void PointCloud::transformCounterClockwise(double radian, const Eigen::Vector2d& translation) {
+void PointCloud::transform(const std::vector<double> &pose) {
+
+    Eigen::Vector2d translation(pose[0], pose[1]);
     Eigen::Matrix2d rotation;
-    rotation << cos(radian), -sin(radian),
-                sin(radian), cos(radian);
-    transform(rotation, translation);
+    double theta = pose[2];
+    rotation << cos(theta), -sin(theta),
+                sin(theta), cos(theta);
+    this->transform(rotation, translation);
 }
+
+// void PointCloud::transformClockwise(double radian, const Eigen::Vector2d& translation) {
+//     Eigen::Matrix2d rotation;
+//     rotation <<  cos(radian), sin(radian),
+//                 -sin(radian), cos(radian);
+//     transform(rotation, translation);
+// }
+
+// void PointCloud::transformCounterClockwise(double radian, const Eigen::Vector2d& translation) {
+//     Eigen::Matrix2d rotation;
+//     rotation << cos(radian), -sin(radian),
+//                 sin(radian), cos(radian);
+//     transform(rotation, translation);
+// }
 
 void PointCloud::voxelDownsample(double voxelSize){
     std::unordered_map<std::pair<int, int>, Voxel, pair_hash> voxelMap;
